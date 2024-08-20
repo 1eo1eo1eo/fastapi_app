@@ -16,6 +16,9 @@ pydantic-settings = "^2.4.0"
 asyncpg = "^0.29.0"
 
 
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
