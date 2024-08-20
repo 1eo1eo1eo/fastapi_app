@@ -9,6 +9,7 @@ from contextlib import asynccontextmanager
 from core.config import settings
 from api import router as api_router
 from core.models import db_helper
+from core.models.base import Base
 
 
 @asynccontextmanager
