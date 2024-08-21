@@ -3,12 +3,12 @@ from fastapi import FastAPI
 import uvicorn
 from contextlib import asynccontextmanager
 
-from core.config import settings
-from core.models import db_helper
-from auth.auth import auth_backend
-from auth.schemas import UserRead, UserCreate
-from core.models import User
-from auth.manager import get_user_manager
+from src.core.config import settings
+from src.core.models import db_helper
+from fastapi_course.src.auth.base_config import auth_backend
+from src.auth.schemas import UserRead, UserCreate
+from src.core.models import User
+from src.auth.manager import get_user_manager
 
 
 @asynccontextmanager
@@ -24,7 +24,7 @@ main_app = FastAPI(
     lifespan=lifespan,
 )
 
-fastapi_users = FastAPIUsers[User, int](
+fastapi_users = FastAPIUsers[User, int]( #type: ignore
     get_user_manager,
     [auth_backend],
 )

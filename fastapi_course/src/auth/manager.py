@@ -6,14 +6,14 @@ from fastapi_users import models
 from fastapi_users import schemas
 from fastapi_users import exceptions
 
-from .database import User, get_user_db
+from .utils import User, get_user_db
 from core.models import User
 from core.config import settings
 
 SECRET = settings.auth.secret_key
 
 
-class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
+class UserManager(IntegerIDMixin, BaseUserManager[User, int]): #type: ignore
     reset_password_token_secret = SECRET
     verification_token_secret = SECRET
 
@@ -22,10 +22,10 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
 
     async def create(
         self,
-        user_create: schemas.UC,
+        user_create: schemas.UC, #type: ignore
         safe: bool = False,
         request: Optional[Request] = None,
-    ) -> models.UP:
+    ) -> models.UP: #type: ignore
 
         await self.validate_password(user_create.password, user_create)
 
@@ -46,7 +46,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
 
         await self.on_after_register(created_user, request)
 
-        return created_user
+        return created_user #type: ignore
 
 
 async def get_user_manager(user_db=Depends(get_user_db)):
