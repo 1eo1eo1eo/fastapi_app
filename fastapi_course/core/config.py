@@ -19,6 +19,9 @@ class DataBaseConfig(BaseModel):
     pool_size: int = 50
     max_overflow: int = 10
 
+class Auth(BaseModel):
+    secret_key: str
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=(".env.template",".env"),
@@ -29,5 +32,6 @@ class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
     db: DataBaseConfig
+    auth: Auth
 
 settings = Settings() # type: ignore

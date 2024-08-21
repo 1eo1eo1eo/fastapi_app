@@ -8,8 +8,9 @@ from fastapi_users import exceptions
 
 from .database import User, get_user_db
 from core.models import User
+from core.config import settings
 
-SECRET = "SECRET"
+SECRET = settings.auth.secret_key
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
