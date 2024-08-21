@@ -1,4 +1,4 @@
-from core.models import role
+from src.core.models import role
 from .base import Base
 
 from datetime import datetime, timezone

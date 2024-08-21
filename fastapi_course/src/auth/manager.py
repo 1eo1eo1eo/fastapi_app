@@ -7,8 +7,8 @@ from fastapi_users import schemas
 from fastapi_users import exceptions
 
 from .utils import User, get_user_db
-from core.models import User
-from core.config import settings
+from src.core.models import User
+from src.core.config import settings
 
 SECRET = settings.auth.secret_key
 

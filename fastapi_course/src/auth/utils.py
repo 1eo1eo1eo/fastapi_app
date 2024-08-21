@@ -1,5 +1,5 @@
-from core.models import db_helper
-from core.models import User
+from src.core.models import db_helper
+from src.core.models import User
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi_users.db import SQLAlchemyUserDatabase

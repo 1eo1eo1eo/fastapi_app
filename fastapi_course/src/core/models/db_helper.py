@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine, async_sessionmaker
 
-from core.config import settings
+from src.core.config import settings
 
 
 class DataBaseHelper:
