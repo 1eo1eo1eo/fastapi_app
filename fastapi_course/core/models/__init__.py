@@ -1,11 +1,11 @@
 __all__ = (
     "db_helper",
     "Base",
-    "Roles",
-    "Users",
+    "Role",
+    "User",
 )
 
 from .db_helper import db_helper
 from .base import Base
-from .roles import Roles
-from .users import Users
+from .role import Role
+from .user import User
