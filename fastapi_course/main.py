@@ -1,15 +1,14 @@
-from datetime import datetime
-from enum import Enum
-from typing import List, Optional
-from pydantic import BaseModel, Field
+from fastapi_users import FastAPIUsers, fastapi_users
 from fastapi import FastAPI
 import uvicorn
 from contextlib import asynccontextmanager
 
 from core.config import settings
-from api import router as api_router
 from core.models import db_helper
-from core.models.base import Base
+from auth.auth import auth_backend
+from auth.schemas import UserRead, UserCreate
+from core.models import User
+from auth.manager import get_user_manager
 
 
 @asynccontextmanager
@@ -25,8 +24,21 @@ main_app = FastAPI(
     lifespan=lifespan,
 )
 
+fastapi_users = FastAPIUsers[User, int](
+    get_user_manager,
+    [auth_backend],
+)
+
 main_app.include_router(
-    api_router,
+    fastapi_users.get_auth_router(auth_backend),
+    prefix="/auth/jwt",
+    tags=["auth"],
+)
+
+main_app.include_router(
+    fastapi_users.get_register_router(UserRead, UserCreate),
+    prefix="/auth",
+    tags=["auth"],
 )
 
 
