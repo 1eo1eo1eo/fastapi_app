@@ -1,4 +1,4 @@
-from src.core.models import db_helper
+from core.models import db_helper
 from .models import User
 
 from sqlalchemy.ext.asyncio import AsyncSession

@@ -3,12 +3,12 @@ from fastapi import FastAPI
 import uvicorn
 from contextlib import asynccontextmanager
 
-from src.core.config import settings
-from src.core.models import db_helper
-from src.auth.base_config import auth_backend
-from src.auth.schemas import UserRead, UserCreate
-from src.auth.models import User
-from src.auth.manager import get_user_manager
+from core.config import settings
+from core.models import db_helper
+from auth.base_config import auth_backend
+from auth.schemas import UserRead, UserCreate
+from auth.models import User
+from auth.manager import get_user_manager
 
 
 @asynccontextmanager
