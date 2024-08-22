@@ -8,8 +8,8 @@ class RunConfig(BaseModel):
     port: int = 8000
 
 
-class ApiPrefix(BaseModel):
-    prefix: str = "/api"
+# class ApiPrefix(BaseModel):
+#     prefix: str = "/api"
 
 
 class DataBaseConfig(BaseModel):
@@ -30,7 +30,7 @@ class Settings(BaseSettings):
         env_prefix="FASTAPI__"
     )
     run: RunConfig = RunConfig()
-    api: ApiPrefix = ApiPrefix()
+   # api: ApiPrefix = ApiPrefix()
     db: DataBaseConfig
     auth: Auth
 
