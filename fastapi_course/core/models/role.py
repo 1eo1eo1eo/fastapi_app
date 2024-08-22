@@ -1,8 +1,8 @@
 from .base import Base
 
-from sqlalchemy import JSON
-from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
+from sqlalchemy import JSON
 
 
 class Role(Base):

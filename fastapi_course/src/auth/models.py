@@ -1,10 +1,16 @@
-from src.core.models import role
-from .base import Base
+from core.models import Base
 
-from datetime import datetime, timezone
-from sqlalchemy import TIMESTAMP, ForeignKey
+from datetime import datetime
+from sqlalchemy import JSON
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import Mapped
+from sqlalchemy import TIMESTAMP, ForeignKey
+
+
+class Role(Base):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(nullable=False)
+    permissions: Mapped[JSON] = mapped_column(type_=JSON)
 
 
 class User(Base):

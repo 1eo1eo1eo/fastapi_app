@@ -7,7 +7,7 @@ from src.core.config import settings
 from src.core.models import db_helper
 from src.auth.base_config import auth_backend
 from src.auth.schemas import UserRead, UserCreate
-from src.core.models import User
+from src.auth.models import User
 from src.auth.manager import get_user_manager
 
 
