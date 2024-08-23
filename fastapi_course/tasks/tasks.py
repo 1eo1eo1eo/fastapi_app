@@ -8,7 +8,7 @@ from core.config import settings
 SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 465
 
-celery = Celery("tasks", broker="redis://localhost:6379")
+celery = Celery("tasks", broker=f"redis://{settings.redis.host}:{settings.redis.port}")
 
 
 def get_email_template_dashboard(username: str):

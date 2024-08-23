@@ -26,6 +26,10 @@ class SMTP(BaseModel):
     user: str
     password: str
 
+class Redis(BaseModel):
+    host: str
+    port: int
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=(".env.template",".env"),
@@ -38,5 +42,6 @@ class Settings(BaseSettings):
     db: DataBaseConfig
     auth: Auth
     smtp: SMTP
+    redis: Redis
 
 settings = Settings() # type: ignore

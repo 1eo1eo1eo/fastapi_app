@@ -19,7 +19,7 @@ from tasks.router import router as router_tasks
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     #startup
-    redis = aioredis.from_url("redis://localhost")
+    redis = aioredis.from_url(f"redis://{settings.redis.host}:{settings.redis.port}")
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
     yield
     #shutdown
