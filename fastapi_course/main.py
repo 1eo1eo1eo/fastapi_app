@@ -1,4 +1,3 @@
-from fastapi_users import FastAPIUsers, fastapi_users
 from fastapi import FastAPI
 import uvicorn
 from contextlib import asynccontextmanager
@@ -11,11 +10,10 @@ from redis import asyncio as aioredis
 
 from core.config import settings
 from core.models import db_helper
-from auth.base_config import auth_backend
+from auth.base_config import auth_backend, fastapi_users
 from auth.schemas import UserRead, UserCreate
-from auth.models import User
-from auth.manager import get_user_manager
 from operations.router import router as router_operation
+from tasks.router import router as router_tasks
 
 
 @asynccontextmanager
@@ -33,10 +31,6 @@ main_app = FastAPI(
     lifespan=lifespan,
 )
 
-fastapi_users = FastAPIUsers[User, int]( #type: ignore
-    get_user_manager,
-    [auth_backend],
-)
 
 main_app.include_router(
     fastapi_users.get_auth_router(auth_backend),
@@ -52,8 +46,12 @@ main_app.include_router(
 
 main_app.include_router(
     router_operation,
-
 )
+
+main_app.include_router(
+    router_tasks,
+)
+
 
 
 if __name__ == "__main__":
