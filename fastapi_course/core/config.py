@@ -22,6 +22,10 @@ class DataBaseConfig(BaseModel):
 class Auth(BaseModel):
     secret_key: str
 
+class SMTP(BaseModel):
+    user: str
+    password: str
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=(".env.template",".env"),
@@ -33,5 +37,6 @@ class Settings(BaseSettings):
    # api: ApiPrefix = ApiPrefix()
     db: DataBaseConfig
     auth: Auth
+    smtp: SMTP
 
 settings = Settings() # type: ignore
