@@ -3,6 +3,8 @@ from sqlalchemy import insert, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends
 from sqlalchemy.orm import Mapped
+from fastapi_cache.decorator import cache
+import time
 
 from core.models import db_helper
 from .schemas import OperationCreate
@@ -13,6 +15,13 @@ router = APIRouter(
     prefix="/operation",
     tags=["Operation"]
 )
+
+
+@router.get("/long_operation")
+@cache(expire=30)
+async def get_long_op():
+    time.sleep(2)
+    return "Many data"
 
 
 @router.get("/")
