@@ -7,27 +7,27 @@ services:
       POSTGRES_DB: app
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-    volumes:
-      - db:/data/postgres
     ports:
       - "5432:5432"
+    volumes:
+      - app:/data/postgres
 
   redis:
     image: redis
     container_name: redis
     ports:
       - "6379:6379"
-    volumes:
-      - db:/data/redis
     environment:
       - REDIS_PASSWORD=password
       - REDIS_PORT=6379
       - REDIS_DATABASES=16
+    volumes:
+      - app:/data/redis
 
   app:
     container_name: app
     env_file:
-      - fastapi_course/.env
+      - backend/.env
     build:
       context: .
       dockerfile: ./dockerfile
@@ -41,19 +41,19 @@ services:
   celery:
     container_name: celery
     env_file:
-      - fastapi_course/.env
+      - backend/.env
     build:
       context: .
     command: ["/app/docker/celery.sh", "celery"]
     depends_on:
       - redis
     volumes:
-      - db:/data/celery
+      - app:/data/celery
 
   flower:
     container_name: flower
     env_file:
-      - fastapi_course/.env
+      - backend/.env
     build:
       context: .
     command: ["/app/docker/celery.sh", "flower"]
@@ -63,11 +63,7 @@ services:
     ports:
       - 8888:5555
     volumes:
-      - db:/data/flower
-
-networks:
-  app-network:
-    driver: bridge
+      - app:/data/flower
 
 volumes:
-  db:
+  app:

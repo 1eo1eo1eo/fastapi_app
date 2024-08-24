@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd fastapi_course
+cd backend
 
 if [[ "${1}" == "celery" ]]; then
     celery --app=tasks.tasks:celery worker -l INFO

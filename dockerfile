@@ -11,6 +11,6 @@ COPY ./ /app/
 
 RUN chmod a+x docker/*.sh
 
-#ORKDIR fastapi_course
+#WORKDIR backend
 
 #CMD gunicorn main:main_app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000
