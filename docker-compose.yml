@@ -3,26 +3,30 @@ services:
   pg:
     image: postgres
     container_name: postgres
+    env_file:
+      - backend/.env
     environment:
       POSTGRES_DB: app
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
+    volumes:
+      - fastapi_app:/data/postgres
     ports:
       - "5432:5432"
-    volumes:
-      - app:/data/postgres
+    networks:
+      - app-network
 
   redis:
     image: redis
     container_name: redis
+    env_file:
+      - backend/.env
     ports:
       - "6379:6379"
-    environment:
-      - REDIS_PASSWORD=password
-      - REDIS_PORT=6379
-      - REDIS_DATABASES=16
     volumes:
-      - app:/data/redis
+      - fastapi_app:/data/redis
+    networks:
+      - app-network
 
   app:
     container_name: app
@@ -37,6 +41,8 @@ services:
       - pg
       - redis
     command: ["/app/docker/app.sh"]
+    networks:
+      - app-network
 
   celery:
     container_name: celery
@@ -48,7 +54,9 @@ services:
     depends_on:
       - redis
     volumes:
-      - app:/data/celery
+      - fastapi_app:/data/celery
+    networks:
+      - app-network
 
   flower:
     container_name: flower
@@ -63,7 +71,13 @@ services:
     ports:
       - 8888:5555
     volumes:
-      - app:/data/flower
+      - fastapi_app:/data/flower
+    networks:
+      - app-network
+    
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
-  app:
+  fastapi_app:

@@ -11,6 +11,8 @@ COPY ./ /app/
 
 RUN chmod a+x docker/*.sh
 
-#WORKDIR backend
+# WORKDIR backend
 
-#CMD gunicorn main:main_app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000
+# RUN alembic upgrade head
+
+# CMD gunicorn main:main_app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000

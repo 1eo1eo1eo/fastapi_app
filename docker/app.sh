@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd fastapi_course
+cd backend
 
 alembic upgrade head
 
